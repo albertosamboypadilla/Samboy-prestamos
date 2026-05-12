@@ -1,0 +1,6 @@
+{
+  "name": "PrestaFlow",
+  "description": "Sistema automatizado de gestión de préstamos, contratos y pagos con generación de comprobantes.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}

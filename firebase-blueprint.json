@@ -1,0 +1,86 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile information",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "displayName": { "type": "string" },
+        "role": { "type": "string", "enum": ["admin", "client"] },
+        "dni": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email", "role"]
+    },
+    "Loan": {
+      "title": "Loan",
+      "description": "Loan application and contract details",
+      "type": "object",
+      "properties": {
+        "clientId": { "type": "string" },
+        "clientName": { "type": "string" },
+        "clientDni": { "type": "string" },
+        "amount": { "type": "number" },
+        "interestRate": { "type": "number" },
+        "termMonths": { "type": "integer" },
+        "status": { "type": "string", "enum": ["pending", "approved", "signed", "active", "closed", "rejected"] },
+        "amortizationTable": { "type": "array" },
+        "contractUrl": { "type": "string" },
+        "signatureRequestId": { "type": "string" },
+        "signatureStatus": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "approvedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["clientId", "amount", "interestRate", "termMonths", "status"]
+    },
+    "Payment": {
+      "title": "Payment",
+      "description": "Payment records for loans",
+      "type": "object",
+      "properties": {
+        "loanId": { "type": "string" },
+        "clientId": { "type": "string" },
+        "amount": { "type": "number" },
+        "date": { "type": "string", "format": "date-time" },
+        "transactionId": { "type": "string" },
+        "voucherUrl": { "type": "string" },
+        "installmentNumber": { "type": "integer" },
+        "notes": { "type": "string" }
+      },
+      "required": ["loanId", "amount", "date", "transactionId"]
+    },
+    "AuditLog": {
+      "title": "AuditLog",
+      "description": "Logs for audit purposes",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "action": { "type": "string" },
+        "details": { "type": "string" },
+        "entityId": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" }
+      },
+      "required": ["action", "timestamp"]
+    }
+  },
+  "firestore": {
+    "users": {
+      "schema": "User",
+      "description": "Collection of user profiles"
+    },
+    "loans": {
+      "schema": "Loan",
+      "description": "Collection of loan documents"
+    },
+    "payments": {
+      "schema": "Payment",
+      "description": "Collection of payment records"
+    },
+    "audit_logs": {
+      "schema": "AuditLog",
+      "description": "System audit logs"
+    }
+  }
+}
